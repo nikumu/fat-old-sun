@@ -4,8 +4,8 @@ const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 
 // Define as dimensões do jogo
-const GAME_WIDTH = 500;
-const GAME_HEIGHT = 500;
+const GAME_WIDTH = 600;
+const GAME_HEIGHT = 600;
 
 // Inicializa o jogador
 let player = {
