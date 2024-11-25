@@ -248,7 +248,7 @@ function updateScore() {
 
 // Função de fim de jogo
 function gameOver() {
-    alert('Fim de Jogo!);
+    alert('Fim de Jogo!');
     player.radius = 10;
     player.x = GAME_WIDTH / 2;
     player.y = GAME_HEIGHT / 2;
