@@ -32,6 +32,8 @@ function drawPlayer() {
 function drawCelestialObject(obj) {
     if (obj.type === 'blackHole') {
         drawDiamond(obj);
+    } else if (obj.type === 'planet' && obj.hasRing) {
+        drawPlanetWithRing(obj);
     } else {
         ctx.beginPath();
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
@@ -56,12 +58,26 @@ function drawDiamond(obj) {
     ctx.restore();
 }
 
+// Função para desenhar um planeta com anel
+function drawPlanetWithRing(obj) {
+    ctx.beginPath();
+    ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
+    ctx.fillStyle = obj.color;
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.ellipse(obj.x, obj.y, obj.radius * 1.5, obj.radius * 0.5, Math.PI / 4, 0, Math.PI * 2);
+    ctx.strokeStyle = '#A52A2A';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
 
 // Função para criar um novo objeto celeste
 function createCelestialObject() {
     const types = ['star', 'planet', 'blackHole', 'sun'];
     const type = types[Math.floor(Math.random() * types.length)];
-    let radius, color;
+    let radius, color, hasRing;
 
     switch (type) {
         case 'star':
@@ -71,6 +87,7 @@ function createCelestialObject() {
         case 'planet':
             radius = Math.random() * 10 + 5;
             color = Math.random() < 0.7 ? '#8B4513' : '#FFD700';
+            hasRing = Math.random() < 0.5;
             break;
         case 'blackHole':
             radius = 15;
@@ -110,6 +127,7 @@ function createCelestialObject() {
         radius: radius,
         color: color,
         type: type,
+        hasRing: hasRing,
         speed: Math.random() * 2 + 1,
         angle: Math.atan2(GAME_HEIGHT / 2 - y, GAME_WIDTH / 2 - x)
     };
